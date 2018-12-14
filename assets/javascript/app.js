@@ -1,10 +1,9 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyC0PsdA3V5Wa2X_uayYCE6mnS7EJeBOhWk",
-  authDomain: "train-scheduler-4eada.firebaseapp.com",
-  databaseURL: "https://train-scheduler-4eada.firebaseio.com",
-  storageBucket: "train-scheduler-4eada.appspot.com",
-  messagingSenderId: "792707784329"
+  apiKey: "AIzaSyA_QypGPkcjPtylRDscf7-HQl8ribnFeIs",
+  authDomain: "time-sheet-55009.firebaseapp.com",
+  databaseURL: "https://time-sheet-55009.firebaseio.com",
+  storageBucket: "time-sheet-55009.appspot.com"
 };
 firebase.initializeApp(config);
 
@@ -35,44 +34,44 @@ $(document).ready(function(){
 });
 
 
-// // Capture Button Click
-// $("#add-train").on("click", function() {
+// Capture Button Click
+$("#add-train").on("click", function() {
 
-//   // Grabbed values from text boxes
-//   trainName = $("#train-name").val().trim();
-//   destination = $("#destination").val().trim();
-//   firstTrainTime = $("#train-time").val().trim();
-//   frequency = $("#frequency").val().trim();
   
-//   // First Time (pushed back 1 year to make sure it comes before current time)
-//   var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
-//   //console.log("FTC: "+firstTimeConverted);
+  trainName = $("#train-name").val().trim();
+  destination = $("#destination").val().trim();
+  firstTrainTime = $("#train-time").val().trim();
+  frequency = $("#frequency").val().trim();
+  
 
-//   // Difference between the times
-//   var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-//   //console.log("Difference in time: " + diffTime);
+  var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
+  
 
-//   // Time apart (remainder)
-//   var tRemainder = diffTime % frequency;
-//   //console.log(tRemainder);
+  // Difference between the times
+  var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+  
 
-//   // Minute Until Train
-//   var minutesAway = frequency - tRemainder;
-//   //console.log("Minutes away: " + minutesAway);
+  // Time apart (remainder)
+  var tRemainder = diffTime % frequency;
+  //console.log(tRemainder);
 
-//   // Next Train
-//   var nextTrain = moment().add(minutesAway, "minutes");
-//   //console.log("Arrival time: " + moment(nextTrain).format("hh:mm"));
+  // Minutes  Until Train Arrives
+  var minutesAway = frequency - tRemainder;
+  
 
-//   // Arrival time
-//   var nextArrival = moment(nextTrain).format("hh:mm a");
+  // Next Train
+  var nextTrain = moment().add(minutesAway, "minutes");
 
-//   var nextArrivalUpdate = function() {
-//     date = moment(new Date())
-//     datetime.html(date.format('hh:mm a'));
-//   }
 
-  // Code for handling the push
+  // Arrival time
+  var nextArrival = moment(nextTrain).format("hh:mm a");
+
+  var nextArrivalUpdate = function() {
+    date = moment(new Date())
+    datetime.html(date.format('hh:mm a'));
+  }
+
+  //  handling the push
   database.ref().push({
     trainName: trainName,
     destination: destination,
@@ -139,7 +138,3 @@ $(document).ready(function(){
 
 
 
-// References:
-// In class activites: 
-// RecentUser_withAllUsers.html
-// Train Example
